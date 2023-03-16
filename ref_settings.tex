@@ -1,0 +1,86 @@
+% Bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Note that different styles might not turn [7,3,4,5] into [3-5,7]. Be careful!
+\renewbibmacro{in:}{}                           % Remove the "In:"
+\DeclareFieldFormat{pages}{\mkfirstpage{#1}} % Only have first page appear
+% % Remove the period between volume and number
+% \renewbibmacro{volume+number+eid}{%
+%     \printfield{volume}%
+%     \setunit{\addcomma\space}%
+%     \printfield{number}}
+\AtEveryBibitem{%
+  \clearfield{shorttitle}%
+  \clearfield{month}%
+  \clearfield{abstract}%
+  \clearfield{title}%
+  % \ifentrytype{article}{%
+  %    \clearfield{title}%
+  % }{}
+}
+% \newcommand{\onlinecite}[1]{\hspace{-1 ex} \nocite{#1}\citenum{#1}} 
+
+% Make all authors be listed as F. M. Surname (in conjunction with giveninits=true)
+\DeclareNameAlias{default}{first-last}
+
+
+% An inline citation without square brackets
+% (From https://tex.stackexchange.com/questions/25962/biblatex-cite-command-to-create-numeric-citation-without-parentheses)
+% A simple modification of code from /usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/cbx/numeric-comp.cbx
+\DeclareCiteCommand{\onlinecite}%[\mkbibbrackets]
+{\usebibmacro{cite:init}%
+  \usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+  \usebibmacro{cite:comp}}
+{}
+{\usebibmacro{cite:dump}%
+  \usebibmacro{postnote}}
+
+
+
+% Make title of citations a hyperlink
+% (From https://tex.stackexchange.com/questions/48400/biblatex-make-title-hyperlink-to-dois-url-or-isbn)
+\newbibmacro{string+doiurl}[1]{%
+  \iffieldundef{doi}{%
+    \iffieldundef{url}{%
+      \textit{#1}%
+    }{%
+      \href{\thefield{url}}{\textit{#1}}%
+    }%
+  }{%
+    \href{http://dx.doi.org/\thefield{doi}}{\textit{#1}}%
+  }%
+}
+
+\DeclareFieldFormat{howpublished}{\texttt{\url{#1}}}
+% \DeclareFieldFormat{title}{\usebibmacro{string+doiurl}{\mkbibemph{#1}}}
+\DeclareFieldFormat{title}{\usebibmacro{string+doiurl}{#1}}
+\DeclareFieldFormat[article,incollection]{title}%
+{\usebibmacro{string+doiurl}{#1}}
+\DeclareFieldFormat{journaltitle}{\textsf{#1}}
+
+% Ensuring \citeauthor is a hyperlink to the bib entry
+\DeclareCiteCommand{\citeauthor}
+{\boolfalse{citetracker}%
+  \boolfalse{pagetracker}%
+  \usebibmacro{prenote}}
+{\ifciteindex
+  {\indexnames{labelname}}
+  {}%
+  \printtext[bibhyperref]{\printnames{labelname}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+
+% Ensuring tildes in urls survive
+\DeclareSourcemap{
+  \maps{
+    \map{
+      \step[fieldsource=howpublished,
+        match=\regexp{\$\\sim\$},
+        replace=\regexp{\~}]
+    }
+    \map{
+      \step[fieldsource=url,
+        match=\regexp{\$\\sim\$},
+        replace=\regexp{\~}]
+    }
+  }
+}

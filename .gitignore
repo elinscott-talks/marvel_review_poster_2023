@@ -1,0 +1,15 @@
+*.aux*
+*.bbl
+*.toc
+*.snm
+*.xml
+poster.out
+*.nav
+*.log
+*.fls
+*.fdb_latexmk
+*.blg
+*.bcf
+_minted-poster
+*.swp
+
