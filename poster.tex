@@ -8,46 +8,6 @@
 
 \usepackage[export]{adjustbox}
 \usepackage{multirow}
-
-\tikzstyle{dummy} = []
-\tikzstyle{line} = [draw, line width=1pt, -latex']
-\tikzstyle{headless_line} = [draw, line width=1pt, -]
-\tikzstyle{default}    = [rectangle, text centered, rounded corners, text=black, font=\sffamily\footnotesize, align=center]
-\tikzstyle{default_text}    = [rectangle, text width=18cm, text=black,anchor=north west, font=\sffamily]
-\tikzstyle{boxwhite} = [default, fill=white, rounded corners=0.2cm]
-\tikzstyle{cp}    = [default, fill=seaborn_blue, text=white, text width=4.5cm, minimum height=1.0cm]
-\tikzstyle{pw}    = [cp, fill=seaborn_green]
-\tikzstyle{kcw}    = [cp, fill=seaborn_orange]
-\tikzstyle{wannier90}    = [cp, fill=seaborn_cyan]
-\tikzstyle{bespoke}    = [cp, fill=seaborn_magenta]
-\tikzstyle{observable}    = [cp, fill=seaborn_red]
-\tikzset{
-  -|-/.style={
-    to path={
-      (\tikztostart) -| ($(\tikztostart)!#1!(\tikztotarget)$) |- (\tikztotarget)
-      \tikztonodes
-    }
-  },
-  -|-/.default=0.5,
-  |-|/.style={
-    to path={
-      (\tikztostart) |- ($(\tikztostart)!#1!(\tikztotarget)$) -| (\tikztotarget)
-      \tikztonodes
-    }
-  },
-  |-|/.default=0.5,
-}
-
-\newlength{\myyshift}
-\setlength{\myyshift}{0.1cm}
-
-\newcommand{\bra}[1]{\langle #1|}
-\newcommand{\braket}[2]{\langle #1|#2\rangle}
-\newcommand{\braopket}[3]{\langle #1|#2|#3\rangle}
-\newcommand{\ket}[1]{|#1\rangle}
-\newcommand{\nline}{\nonumber \\}
-\newcommand{\Trace}{\mathrm{Tr}}
-
 \usepackage{sansmath}
 \sansmath
 \usepackage{helvet}
@@ -64,7 +24,6 @@
 \setbeamertemplate{itemize item}{\color{kgrey}$\blacktriangleright$}
 \beamertemplatenavigationsymbolsempty
 
-\input{seaborn_colours}
 \usepackage{siunitx,booktabs}
 \renewcommand{\ttdefault}{pcr}
 
@@ -106,22 +65,22 @@
         \hfill
         \setbeamercolor{marvelheader}{fg=white,bg=marvel_red}
         \begin{minipage}[height=0.15\textwidth]{0.4\textwidth}
-        \begin{beamercolorbox}[wd=\textwidth,sep=1em]{marvelheader}
-            \centering
-            \bf
-            {\fontsize{100}{120}\selectfont Pillar 4}
-        \end{beamercolorbox}
+            \begin{beamercolorbox}[wd=\textwidth,sep=1em]{marvelheader}
+                \centering
+                \bf
+                {\fontsize{100}{120}\selectfont Pillar 4}
+            \end{beamercolorbox}
         \end{minipage}
         \hfill
         \begin{minipage}[height=0.15\textwidth]{0.15\textwidth}
-        \includegraphics[width=\textwidth]{/home/elinscott/Pictures/epfl_logos/red_cropped.eps}
+            \includegraphics[width=\textwidth]{figures/red_cropped.eps}
         \end{minipage}
     \end{beamercolorbox}
     \setbeamercolor{banner}{fg=kgrey,bg=white}
     \begin{beamercolorbox}[wd=\textwidth,sep=1em]{banner}
         \bf
         \begin{center}
-            {\includegraphics[width=0.55\paperwidth]{figures/koopmans_grey_on_transparent.png}}
+            {\fontsize{150}{180}\selectfont Title}
 
             % \vspace{-11em}
             % \hbox{\hspace{0.77\textwidth}
@@ -136,167 +95,32 @@
             %     \end{tcolorbox}
             % }
 
-            \vspace{-1em}
-            \LARGE
-            \emph{an open-source package for accurately and efficiently predicting spectral properties with Koopmans functionals}
-
             \vspace{1em}
             \large
-            Edward Linscott,\textsuperscript{1} Nicola Colonna,\textsuperscript{2,3} Riccardo De Gennaro,\textsuperscript{1} and Nicola Marzari\textsuperscript{1,2,4}
+            Name,\textsuperscript{1}
             \vspace{1em}
         \end{center}
     \end{beamercolorbox}
 
     \vspace{-0.001\paperheight}
-    \setbeamercolor{background}{fg=white,bg=seaborn_bg_grey}
+    \setbeamercolor{background}{fg=white,bg=white}
     \begin{beamercolorbox}[ht=0.675\paperheight,wd=\textwidth]{background}
 
         \begin{columns}[t]
             \begin{column}{0.37\linewidth}
                 \begin{block}{Summary}
-                    \texttt{koopmans} contains everything you need to run a Koopmans functional calculation without expert knowledge, including implementations of Koopmans functionals in \textsc{Quantum ESPRESSO} as well as automated workflows.
-                \end{block}
-
-                \vspace{1.8ex}
-
-                \begin{block}{1. What are Koopmans functionals?}
-                    \nocite{Dabo2009,Dabo2010,Borghi2014,Colonna2018,Nguyen2018,Colonna2019,DeGennaro2022,Colonna2022,Linscott2023}
-                    Koopmans functionals are a class of functionals that aim to reproduce spectral properties (charged excitations) and total energies on the same footing, enforcing a generalised piecewise linearity condition:
-                    \vspace{0.125em}
-                    \begin{equation*}
-                        E_\mathrm{Koopmans} = E_\mathrm{DFT} + \sum_i \alpha_i \biggl[ \underbrace{- \left(E_\mathrm{DFT} - \left.E_\mathrm{DFT}\right|_{{f_i}=0}\right)}_{\substack{\text{removes the erroneous} \\ \text{curvature}}} \underbrace{+ f_i \eta_i}_{\substack{\text{restores the}\\ \text{correct linearity}}} \biggr]
-                    \end{equation*}
-
-                    \vspace{1.35em}
+                    Your text here
                 \end{block}
 
             \end{column}
 
             \begin{column}{0.57\linewidth}
 
-                \begin{block}{2. Workflows}
-                    \vspace{0.5ex}
-                    \begin{center}
-                        \begin{minipage}{\linewidth}
-                            Supercell implementation
-
-                            \vspace{-2ex}
-                            \input{supercell_workflow_2.tex}
-
-                            \vspace{-2ex}
-                            \noindent Primitive cell implementation
-
-                            \vspace{0.5ex}
-                            \input{primitive_workflow.tex}
-                        \end{minipage}
-                    \end{center}
-                \end{block}
-            \end{column}
-
-        \end{columns}
-
-        \vspace{1em}
-        \begin{columns}
-            \begin{column}{0.968\textwidth}
-                \begin{block}{3. Example results}
-                    \setlength{\tabcolsep}{5pt}
-                    \renewcommand{\arraystretch}{1}
-                    \vspace{0.7em}
-                    \hbox{
-
-                        \begin{minipage}[0.25\textwidth]{0.4\textwidth}
-
-                            \textbf{Koopmans functionals give band structures and orbital energies as accurate as state-of-the-art GW, at a fraction of the computational cost.}
-
-                            \vspace{1em}
-
-                            \textbf{Semiconductors and insulators} (right) Band gap and ionisation potential of semiconductors and insulators compared to experiment \textcolor{kgrey_light}{\citeauthoryear{Nguyen2018}}
-
-                            \vspace{1em}
-
-                            \textbf{Molecules} (below) The KI, pKIPZ, and KIPZ Koopmans functionals give ionization potentials comparable to qpGW across the GW100 dataset \textcolor{kgrey_light}{\citeauthoryear{Colonna2019}}
-
-                            \vspace{1ex}
-
-                            \includegraphics[width=\columnwidth]{figures/colonna_2019_gw100_ip.jpeg}
-
-                        \end{minipage}
-
-                        \hspace{0.5em}
-
-                        \begin{minipage}{0.55\textwidth}
-                            \begin{minipage}{0.5\textwidth}
-                                    \includegraphics[width=0.9\textwidth,valign=t]{figures/nguyen2018_bandgaps.png}
-                            \small
-                            \begin{center}
-                            \begin{tabular}{c c S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2] S[table-format = 2.2]}
-                                                                  &             & {PBE} & {G\textsubscript{0}W\textsubscript{0}} & {KI} & {KIPZ} & {QSG$\tilde{\mathrm{W}}$} \\
-                                \midrule
-                                \midrule
-                                \multirow{2}{*}{$E_\mathrm{gap}$} &
-                                {MAE (eV)}                        & 2.54        & 0.56  & 0.27                                   & 0.22 & 0.18                               \\
-                                                                  & {MAPE (\%)} & 48.28 & 12.10                                  & 7.09 & 5.37   & 4.46                      \\
-                                \midrule
-                                \multirow{2}{*}{IP}               &
-                                {MAE (eV)}                        & 1.09        & 0.39  & 0.19                                   & 0.21 & 0.49                               \\
-                                                                  & {MAPE (\%)} & 15.58 & 5.71                                   & 2.99 & 3.14   & 7.41
-                            \end{tabular}
-                        \end{center}
-                            \end{minipage}
-                            \begin{minipage}{0.45\textwidth}
-                                    \includegraphics[width=\textwidth,valign=c]{figures/ZnO_ki_trimmed.png}
-
-                                    \vspace{1ex}
-
-                                    The KI band structure of ZnO compared to the experimental band gap and $d$-band position \textcolor{kgrey_light}{\citeauthoryear{Colonna2022}}
-                            \end{minipage}
-                        \end{minipage}
-
-                    }
-                    \hfill
-
-                \end{block}
-            \end{column}
-        \end{columns}
-
-        \vspace{1.2em}
-        \begin{columns}[t]
-            \begin{column}{0.47\textwidth}
-                \begin{block}{4. What does running \texttt{koopmans} look like?}
-
-                    \hbox{
-                        \begin{minipage}[t]{0.44\columnwidth}
-                            Koopmans takes a single \texttt{JSON} file as input e.g. for bulk silicon
-                            \vspace{0.2em}
-                            \inputminted[fontsize=\tiny, autogobble, breaklines]{json}{scripts/si_ki.json}
-                        \end{minipage}
-                        \hspace{0.025\columnwidth}
-                        \begin{minipage}[t]{0.5\columnwidth}
-                            Running from the command line looks like this:
-                            \vspace{0.3em}
-                            \inputminted[fontsize=\tiny, autogobble, breaklines]{shell-session}{scripts/si_ki.out}
-                        \end{minipage}
-                    }
-                    \hfill
-                    \vspace{0.86em}
-
+                \begin{block}{1. Other stuff}
+                    More explanation here
                 \end{block}
 
-            \end{column}
-
-            \begin{column}{0.47\textwidth}
-                \setbeamercolor{block title}{bg=white, fg=white}
-                \begin{block}{\vphantom{P}}
-                    \vspace{-2.8ex}
-                    or run with \texttt{python}:
-                    \inputminted[fontsize=\tiny, autogobble, breaklines]{python}{scripts/si.py}
-                \end{block}
-
-                \vspace{1em}
-                \setbeamercolor{block title}{bg=kgrey, fg=white}
                 \begin{block}{References, affiliations, and acknowledgements}
-                    \vspace{0.4em}
-                    \hspace{-2em}
                     \begin{minipage}{0.45\textwidth}
                         \AtNextBibliography{\tiny}
                         \printbibliography
@@ -306,15 +130,10 @@
                         \setbeamercolor{enumerate item}{fg=kgrey}
                         \begin{enumerate}
                             \item Theory and Simulation of Materials (THEOS), \'Ecole Polytechnique F\'ed\'erale de Lausanne, 1015 Lausanne, Switzerland
-                            \item National Centre for Computational Design and Discovery of Novel Materials (MARVEL), \'Ecole Polytechnique F\'ed\'erale de Lausanne, 1015 Lausanne, Switzerland
-                            \item Laboratory for Neutron Scattering and Imaging, Paul Scherrer Institute, 5232 Villigen, Switzerland
-                            \item Laboratory for Materials Simulations, Paul Scherrer Institut, 5232 Villigen, Switzerland
                         \end{enumerate}
                         \vspace{1em}
-                        This work was supported by the Swiss National Science Foundation (SNSF) through its National Centre of Competence in Research (NCCR) MARVEL and Grants 179138 and 213082.
+                        This work was supported by...
                     \end{minipage}
-
-                    \vspace{0.45ex}
 
                     % \vspace{0.8em}
                     % \includegraphics[height=0.07\columnwidth]{/home/elinscott/Pictures/epfl_logos/red_cropped.eps}
@@ -327,68 +146,22 @@
                     % \vspace{0.5em}
 
                 \end{block}
-                % \begin{beamercolorbox}[wd=\textwidth,sep=1em]{logos}
-                % \end{beamercolorbox}
-
             \end{column}
-        \end{columns}
 
-        \vspace{1.25em}
+        \end{columns}
 
     \end{beamercolorbox}
 
     \setbeamercolor{footer}{fg=kgrey,bg=white}
     \begin{beamercolorbox}[wd=\textwidth,sep=1em]{footer}
         \begin{minipage}{0.55\textwidth}
-        \includegraphics[width=0.3\columnwidth]{/home/elinscott/Pictures/snsf_logos/SNF_logo_standard_print_color_pos_e.eps}
-        \hspace{0.01\columnwidth}
-        \tiny The National Centres of Competence in Research (NCCRs) are a funding scheme of the Swiss National Science Foundation
+            \includegraphics[width=0.3\columnwidth]{/home/elinscott/Pictures/snsf_logos/SNF_logo_standard_print_color_pos_e.eps}
+            \hspace{0.01\columnwidth}
+            \tiny The National Centres of Competence in Research (NCCRs) are a funding scheme of the Swiss National Science Foundation
         \end{minipage}
         \hfill
-        \begin{minipage}{0.3\textwidth}
-            \raggedleft
-            \bf \large ... go to {\ttfamily \bf \large koopmans-functionals.org} to find out more!
-        \end{minipage}
     \end{beamercolorbox}
 
 \end{frame}
-% \setlength{\myimscale}{0.08\textwidth}
-% \begin{tikzpicture}[every node/.style={color=kgrey}]
-%     \node[inner sep=0pt] (logo) at (3\myimscale,0\myimscale)
-%     {\includegraphics[width=0.7\textwidth]{figures/k_grey_on_transparent.png}};
-%     \node[rectangle, draw, thick, minimum width=5.75\myimscale, minimum height=3.5\myimscale, outer sep=0, label=above:linearisation,
-%         path picture={
-%                 \node at (path picture bounding box.center){
-%                     \includegraphics[width=5.75\myimscale]{figures/linearisation.png}
-%                 };
-%             }] (linear) at (0\myimscale,5.2\myimscale) {};
-%     \node[rectangle, draw, thick, minimum width=5.75\myimscale, minimum height=3.5\myimscale, outer sep=0, label=above:screening,
-%         path picture={
-%                 \node at (path picture bounding box.center){
-%                     \includegraphics[width=5.75\myimscale]{figures/screening.png}
-%                 };
-%             }] (screening) at (6.25\myimscale,5.2\myimscale) {};
-%     \node[rectangle, minimum width=2.5\myimscale, minimum height=3.5\myimscale, outer sep=0,
-%         path picture={
-%                 \node at ([yshift=-0.05\myimscale]path picture bounding box.center){
-%                     \includegraphics[width=2.5\myimscale]{figures/fig_nguyen_canonical_orbital.png}
-%                 };
-%             }] (bloch) at (-1.5\myimscale,-5.2\myimscale) {};
-%     \node[rectangle, minimum width=2.5\myimscale, minimum height=3.5\myimscale, outer sep=0,
-%         path picture={
-%                 \node at ([yshift=1.5\myimscale]path picture bounding box.center){
-%                     \includegraphics[width=2.6\myimscale]{figures/fig_nguyen_variational_orbital.png}
-%                 };
-%             }] (wannier) at (1.5\myimscale,-5.2\myimscale) {};
-%     \node[rectangle, draw, thick, minimum width=5.75\myimscale, minimum height=3.5\myimscale, outer sep=0, label=below:localisation,
-%     ] (localisation) at (0\myimscale,-5.2\myimscale) {};
-%     \node[rectangle, draw, thick, minimum width=5.75\myimscale, minimum height=3.5\myimscale, outer sep=0, label=below:automation,
-%         path picture={
-%                 \node at (path picture bounding box.east){
-%                     \includegraphics[width=15\myimscale]{figures/dscf_workflow.png}
-%                 };
-%             }] (workflow) at (6.25\myimscale,-5.2\myimscale) {};
-%     \draw[thick, -{Latex[round]}] (bloch) -- (wannier);
-% \end{tikzpicture}
 
 \end{document}
