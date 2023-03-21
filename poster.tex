@@ -1,6 +1,6 @@
 %\documentclass[varwidth=true, border=5pt, convert={size=640x}]{standalone}
 \documentclass{beamer}
-\usepackage[scale=1.25,size=custom,width=91.4,height=121.9,orientation=portrait]{beamerposter}
+\usepackage[scale=1.25,size=custom,width=84.1,height=118.9,orientation=portrait]{beamerposter}
 \geometry{margin=10mm}
 \usepackage{tikz}
 \usetikzlibrary{positioning,shapes,arrows,backgrounds,calc,fit,trees,arrows.meta,external}
@@ -15,7 +15,7 @@
 \tikzstyle{default}    = [rectangle, text centered, rounded corners, text=black, font=\sffamily\footnotesize, align=center]
 \tikzstyle{default_text}    = [rectangle, text width=18cm, text=black,anchor=north west, font=\sffamily]
 \tikzstyle{boxwhite} = [default, fill=white, rounded corners=0.2cm]
-\tikzstyle{cp}    = [default, fill=seaborn_blue, text=white, text width=4.8cm, minimum height=1.0cm]
+\tikzstyle{cp}    = [default, fill=seaborn_blue, text=white, text width=4.5cm, minimum height=1.0cm]
 \tikzstyle{pw}    = [cp, fill=seaborn_green]
 \tikzstyle{kcw}    = [cp, fill=seaborn_orange]
 \tikzstyle{wannier90}    = [cp, fill=seaborn_cyan]
@@ -88,6 +88,8 @@
 \setbeamercolor*{bibliography entry note}{fg=kgrey}
 \setbeamertemplate{bibliography item}{}
 
+\usepackage{anyfontsize}
+
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,hooks}
 \tcbset{colframe=structure,fonttitle=\bfseries,beamer, clip upper, boxsep=0pt, sharp corners=all, no shadow, left skip=0pt, right skip=0pt, coltext=white}
@@ -103,11 +105,11 @@
         \end{minipage}
         \hfill
         \setbeamercolor{marvelheader}{fg=white,bg=marvel_red}
-        \begin{minipage}[height=0.15\textwidth]{0.3\textwidth}
+        \begin{minipage}[height=0.15\textwidth]{0.4\textwidth}
         \begin{beamercolorbox}[wd=\textwidth,sep=1em]{marvelheader}
             \centering
-            \huge
-            \textbf{Pillar I/II/III/IV}
+            \bf
+            {\fontsize{100}{120}\selectfont Pillar IV}
         \end{beamercolorbox}
         \end{minipage}
         \hfill
@@ -141,12 +143,13 @@
             \vspace{1em}
             \large
             Edward Linscott,\textsuperscript{1} Nicola Colonna,\textsuperscript{2,3} Riccardo De Gennaro,\textsuperscript{1} and Nicola Marzari\textsuperscript{1,2,4}
+            \vspace{1em}
         \end{center}
     \end{beamercolorbox}
 
     \vspace{-0.001\paperheight}
     \setbeamercolor{background}{fg=white,bg=seaborn_bg_grey}
-    \begin{beamercolorbox}[ht=0.674\paperheight,wd=\textwidth]{background}
+    \begin{beamercolorbox}[ht=0.675\paperheight,wd=\textwidth]{background}
 
         \begin{columns}[t]
             \begin{column}{0.37\linewidth}
@@ -294,11 +297,11 @@
                 \begin{block}{References, affiliations, and acknowledgements}
                     \vspace{0.4em}
                     \hspace{-2em}
-                    \begin{minipage}{0.475\textwidth}
+                    \begin{minipage}{0.45\textwidth}
                         \AtNextBibliography{\tiny}
                         \printbibliography
                     \end{minipage}
-                    \begin{minipage}{0.525\textwidth}
+                    \begin{minipage}{0.575\textwidth}
                         \tiny
                         \setbeamercolor{enumerate item}{fg=kgrey}
                         \begin{enumerate}
@@ -342,7 +345,8 @@
         \tiny The National Centres of Competence in Research (NCCRs) are a funding scheme of the Swiss National Science Foundation
         \end{minipage}
         \hfill
-        \begin{minipage}{0.4\textwidth}
+        \begin{minipage}{0.3\textwidth}
+            \raggedleft
             \bf \large ... go to {\ttfamily \bf \large koopmans-functionals.org} to find out more!
         \end{minipage}
     \end{beamercolorbox}

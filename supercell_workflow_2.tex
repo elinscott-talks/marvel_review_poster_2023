@@ -1,4 +1,4 @@
-\begin{tikzpicture}[font=\tiny, x=6.5cm, y=2cm]
+\begin{tikzpicture}[font=\tiny, x=5.9cm, y=2cm]
    \begin{scope}[scale=0.7, every node/.style={scale=0.7}]
    \begin{pgfonlayer}{background}
       % \node[fit= (KC init) (empty label) (filled label) (sc loop 1) (converged label), fill=seaborn_bg_grey, inner sep=0.5cm] (calculating screening) {};
@@ -117,10 +117,10 @@
    % Boxes
    % Screening parametere
    \node [boxwhite, fit= (N-1_filled) (EN-1_filled),
-      draw, dashed, fill opacity=0, inner sep=0.15cm](filled box){};
+      draw, dashed, fill opacity=0, inner sep=0.05cm](filled box){};
    \node [dummy, above=-0.2cm of filled box, font=\sffamily](filled label){\tiny one per unique filled orbital (index $i$)};
    \node [boxwhite, fit= (N+1_empty) (EN+1_empty),
-      draw, dashed, fill opacity=0, inner sep=0.15cm](empty box){};
+      draw, dashed, fill opacity=0, inner sep=0.05cm](empty box){};
    \node [dummy, below=-0.2cm of empty box, font=\sffamily](empty label){\tiny one per unique empty orbital (index $i$)};
 
    % SC loop
