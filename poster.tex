@@ -2,9 +2,6 @@
 \documentclass{beamer}
 \usepackage[scale=1.25,size=custom,width=84.1,height=118.9,orientation=portrait]{beamerposter}
 \geometry{margin=10mm}
-\usepackage{tikz}
-\usetikzlibrary{positioning,shapes,arrows,backgrounds,calc,fit,trees,arrows.meta,external}
-\newlength{\myimscale}
 
 \usepackage[export]{adjustbox}
 \usepackage{multirow}
@@ -26,16 +23,6 @@
 
 \usepackage{siunitx,booktabs}
 \renewcommand{\ttdefault}{pcr}
-
-\usepackage{minted}
-\usemintedstyle{friendly}
-% \usemintedstyle{gruvbox}
-% \definecolor{gruvbox_dark_bg}{HTML}{282828}
-% \definecolor{gruvbox_fg}{HTML}{ebdbb2}
-% \setminted[python]{bgcolor=gruvbox_dark_bg}
-% \setminted[json]{bgcolor=gruvbox_dark_bg}
-% \setminted[shell-session]{style=gruvbox_plain, bgcolor=gruvbox_dark_bg}
-
 
 \usepackage[backend=biber, bibencoding=utf8, style=science, maxbibnames=1, maxcitenames=1, 
             sorting=none, giveninits=true, isbn=false, doi=false, url=false]{biblatex}
@@ -82,19 +69,6 @@
         \begin{center}
             {\fontsize{150}{180}\selectfont Title}
 
-            % \vspace{-11em}
-            % \hbox{\hspace{0.77\textwidth}
-            %     \begin{tcolorbox}[enhanced jigsaw, width=16cm, opacityback=0, colframe=seaborn_red, coltext=seaborn_red, left=10pt, bottom=10pt, top=10pt, right=10pt, tikz={rotate=30,transform shape}, boxrule=5mm]
-            %         \begin{center}
-            %             % \includegraphics[height=1cm]{./figures/qe_logo_high_res_cropped.jpg}
-            %             % \bf \huge\ \raisebox{0.3cm}{+}\,
-            %             % \includegraphics[height=1cm]{./figures/python_logo.png}
-
-            %             \bf \Huge OUT NOW!
-            %         \end{center}
-            %     \end{tcolorbox}
-            % }
-
             \vspace{1em}
             \large
             Name,\textsuperscript{1}
@@ -134,16 +108,6 @@
                         \vspace{1em}
                         This work was supported by...
                     \end{minipage}
-
-                    % \vspace{0.8em}
-                    % \includegraphics[height=0.07\columnwidth]{/home/elinscott/Pictures/epfl_logos/red_cropped.eps}
-                    % \hfill
-                    % \includegraphics[height=0.07\columnwidth]{figures/psi_trimmed.png}
-                    % \hfill
-                    % \includegraphics[height=0.07\columnwidth]{figures/marvel_trimmed.png}
-                    % \hfill
-                    % \includegraphics[height=0.07\columnwidth]{/home/elinscott/Pictures/snsf_logos/SNF_logo_standard_print_color_pos_e.eps}
-                    % \vspace{0.5em}
 
                 \end{block}
             \end{column}
